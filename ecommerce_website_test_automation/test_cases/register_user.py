@@ -1,25 +1,24 @@
-from playwright.sync_api import expect
+from ecommerce_website_test_automation.page_pom import home, signup_login
 
-
-def test_register_user(set_up_ecommerce_website):
+@pytest.mark.parametrize("name,email", ["user1", "mail2sapachowdhury@gmail.com"])
+def test_register_user(set_up_ecommerce_website, name, email):
     page = set_up_ecommerce_website
+
+
     # Verify that home page is visible successfully
-    assert page.get_by_text("Home").is_visible(timeout=3000)
+    home.home_is_visible(page)
 
     # Click on 'Signup / Login' link and wait for navigation
-    with page.expect_navigation(timeout=10000):
-        page.get_by_text("Signup / Login").click(timeout=5000)
+    signup_login.click_sign_up_link(page)
 
     # Verify 'New User Signup!' is visible
-    assert page.get_by_role("heading", name="New User Signup!").is_visible(timeout=3000)
+    assert signup_login.get_new_user_sign_up_locator(page).is_visible(timeout=3000)
 
     # Enter name and email address
-    page.get_by_placeholder("Name").fill("user1")
-    page.get_by_test_id("signup-email").fill("mail2sapachowdhury@gmail.com")
+    signup_login.fill_signup_details(name, email)
 
     # Click 'Signup' button and wait for navigation
-    with page.expect_navigation(timeout=10000):
-        page.get_by_test_id("signup-button").click(timeout=5000)
+    signup_login.click_sign_up_button(page)
 
     # Verify that 'ENTER ACCOUNT INFORMATION' is visible
     assert page.get_by_role("heading", name="ENTER ACCOUNT INFORMATION").is_visible(timeout=3000)
