@@ -22,6 +22,7 @@ jobs:
 
       - name: 🧪 Run Pytest with Allure
         run: |
+          cd ecommerce_website_test_automation/test_cases
           pytest --alluredir=allure-results
 
       - name: ⬇️ Upload Allure raw results
