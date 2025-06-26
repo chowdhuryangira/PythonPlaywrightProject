@@ -1,10 +1,10 @@
 import pytest
-from exceptiongroup import catch
-from selenium.common import NoSuchElementException
+import allure
 
 from ecommerce_website_test_automation.page_pom import home, signup_login
 
-
+@allure.title("Verify login functionality")
+@allure.description("Login with valid username and password and invalid username and password")
 @pytest.mark.parametrize("email,password,username", [("mail2sapachowdhury@gmail.com","abc123","user1"),("abc@gmail.com", "xyz789", "user2")])
 def test_login_user(set_up_ecommerce_website, email, password, username):
     """
