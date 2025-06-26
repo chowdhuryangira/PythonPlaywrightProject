@@ -28,3 +28,10 @@ def get_new_user_sign_up_locator(page):
     Sets the locator for the 'New User Signup!' heading.
     """
     return page.get_by_role("heading", name="New User Signup!")
+
+def click_login_button(page):
+    """
+    Clicks the 'Login' button and waits for navigation.
+    """
+    with page.expect_navigation(timeout=10000):
+        page.get_by_test_id("login-button").click(timeout=5000)
