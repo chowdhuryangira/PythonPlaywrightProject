@@ -10,7 +10,7 @@ def set_up_ecommerce_website(playwright):
     This fixture launches a browser, creates a new context and page,
     and navigates to the sign-in page of the e-commerce website.
     """
-    browser = playwright.chromium.launch(headless=False, slow_mo=1000)
+    browser = playwright.chromium.launch(headless=True, slow_mo=1000)
     context = browser.new_context()
     page = context.new_page()
     page.wait_for_load_state("networkidle", timeout=1000)
