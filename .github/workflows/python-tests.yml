@@ -20,6 +20,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest-playwright
           pip install allure-pytest
+          playwright install chromium
 
       - name: 🧪 Run Pytest with Allure
         run: |
